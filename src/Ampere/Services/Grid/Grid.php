@@ -5,6 +5,7 @@ namespace Ampere\Services\Grid;
 use Ampere\Ampere;
 use Ampere\Services\Common;
 use Ampere\Services\Grid\Source\DataSource;
+use Ampere\Services\Grid\Source\ExternalDataSource;
 use Ampere\Services\Grid\Source\ModelDataSource;
 use Ampere\Services\Route;
 use Ampere\Services\Workshop\Component;
@@ -125,6 +126,17 @@ class Grid
     {
         $this->dataSource = new ModelDataSource($this);
         $this->dataSource->setModel($class);
+        return $this;
+    }
+
+    /**
+     * @param \Closure $closure
+     * @return Grid
+     */
+    public function external(\Closure $closure): self
+    {
+        $this->dataSource = new ExternalDataSource($this);
+        $this->dataSource->setCallback($closure);
         return $this;
     }
 
@@ -361,12 +373,12 @@ class Grid
      */
     private function processExportRequest()
     {
+        $filter = $this->getQuery();
+        
         if (isset($filter['__export'])) {
             $this->dataSource->setLimit($this->exportLimit);
             $this->dataSource->setOffset(0);
             $this->dataSource->execute();
-
-            $filter = $this->getQuery();
 
             $rows = [];
 

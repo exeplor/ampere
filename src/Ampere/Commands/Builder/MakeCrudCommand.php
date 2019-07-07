@@ -74,7 +74,6 @@ class MakeCrudCommand extends Command
         $this->model = $this->getReflectionModel($className);
         $this->menu = $this->getMenu();
 
-        $this->createResources();
         $this->buildController();
         $this->buildViews();
     }
