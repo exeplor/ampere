@@ -1,0 +1,87 @@
+<?php
+
+namespace {namespace};
+
+use Ampere\Controllers\Controller;
+use Ampere\Services\Grid\Grid;{usedControllers}
+use {modelClass};
+
+/**
+ * Class {controller}
+ * @package {namespace}
+ */
+class {controller} extends Controller
+{
+    /**
+     * {modelTitle} list{menu}
+     */
+    public function index(Grid $grid)
+    {
+{grid}
+
+        $grid->action('Edit')->primary()->route(self::route('edit'), 'id');
+        $grid->action('Delete', 'delete')->danger()->route(self::route('delete'), 'id');
+
+        $grid->model({modelName}::class)->limit(32)->search();
+
+        return $this->render('{view}.index', compact('grid'));
+    }
+
+    /**
+     * Edit {modelTitle}
+     * @route edit/{model}
+     */
+    public function edit({modelName} $model)
+    {
+        return $this->render('{view}.form', compact('model'));
+    }
+
+    /**
+     * @post edit
+     */
+    public function update({modelName} $model)
+    {
+        $model->update($this->form());
+        return redirect(self::route('index'))->with('success', __('{modelTitle} successfully updated'));
+    }
+
+    /**
+     * Create new {modelTitle}
+     * @route create
+     */
+    public function create()
+    {
+        return $this->render('{view}.form');
+    }
+
+    /**
+     * @post create
+     */
+    public function store()
+    {
+        {modelName}::create($this->form());
+        return redirect(self::route('index'))->with('success', __('{modelTitle} successfully created'));
+    }
+
+    /**
+     * @route delete/{model}
+     * @delete
+     */
+    public function delete({modelName} $model)
+    {
+        $model->delete();
+        return redirect(self::route('index'));
+    }{search}
+
+    /**
+     * @return array
+     */
+    private function form(): array
+    {
+        $fields = [
+{validationRules}
+        ];
+
+        return collect($this->validate($fields))->only(array_keys($fields))->toArray();
+    }
+}

@@ -1,0 +1,75 @@
+<?php
+
+return [
+
+    /*
+     * Main configuration
+     */
+    'app' => [
+
+        /*
+         * Ampere url path
+         */
+        'url_prefix' => '{url_prefix}',
+    ],
+
+    /*
+     * Routing configuration
+     */
+    'routing' => [
+
+        /*
+         * Controllers folder
+         */
+        'folder' => 'app/Http/Controllers{space}',
+
+        /*
+         * Controller namespace
+         */
+        'namespace' => 'App\Http\Controllers{namespace}',
+
+        /*
+         * Space route prefix
+         */
+        'prefix' => '{route_prefix}'
+    ],
+
+    /*
+     * Ampere DB configuration
+     */
+    'db' => [
+        'prefix' => '{db_prefix}'
+    ],
+
+    /*
+     * Authorization config
+     */
+    'auth' => [
+
+        /*
+         * Captcha settings
+         */
+        'google_captcha' => [
+            'enabled' => env('AMPERE_CAPTCHA_ENABLED', false),
+            'site_key' => env('AMPERE_CAPTCHA_SITE_KEY'),
+            'secret_key' => env('AMPERE_CAPTCHA_SECRET_KEY')
+        ]
+    ],
+
+    /*
+     * Installation settings
+     */
+    'install' => [
+        /*
+         * Ampere public assets folder
+         */
+        'assets_folder' => '{public_vendor_name}'
+    ],
+
+    /*
+     * Views configuration
+     */
+    'views' => [
+        'name' => '{views_folder}'
+    ]
+];

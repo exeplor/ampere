@@ -1,0 +1,36 @@
+<?php
+    /**
+     * @var \Ampere\Services\Workshop\Page\Layout $layout
+     * @var \Ampere\Services\Workshop\Component $component
+     * @var \Ampere\Services\Workshop\Page\Assets $include
+     * @var \Ampere\Services\Workshop\Form\Form $form
+     * @var object $data
+     */
+?>
+
+@php($layout->title('{modelTitlePlural}'))
+@php($component->show('header', [
+    'title' => isset($data->model) ? 'Update {modelTitle} #' . $data->model->id : 'Create new {modelTitle}',
+    'subtitle' => '{modelTitle} form',
+    'buttons' => [
+        'create' => [
+            'title' => 'List of {modelTitlePlural}',
+            'route' => \{controller}::route('index'),
+        ]
+    ]
+]))
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="ibox">
+            <div class="ibox-body">
+                {!! $form->open()->model($data->model ?? null) !!}
+
+                    {controls}
+                    <button class="btn btn-primary">{{ isset($data->model) ? 'Update' : 'Create' }}</button>
+
+                {!! $form->close() !!}
+            </div>
+        </div>
+    </div>
+</div>

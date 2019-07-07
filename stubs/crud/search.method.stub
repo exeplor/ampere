@@ -1,0 +1,11 @@
+
+
+    /**
+     * @post
+     */
+    public function search(SelectSearch $search)
+    {
+        {fields}
+
+        return $search->response();
+    }
