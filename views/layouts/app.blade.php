@@ -79,15 +79,6 @@
             </div>
 
             <div id="content">
-                <div class="ibox">
-                    <div class="ibox-body smart-search-ext">
-                        <button class="btn">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <input placeholder="Smart search...">
-                    </div>
-                </div>
-
                 {!! $layout->getContent() !!}
             </div>
 
