@@ -24,6 +24,7 @@ class Menu
         }
 
         $menu = $this->merge($basicMenu, $customMenu);
+        $this->saveCustomMenu($menu);
 
         return $menu;
     }
@@ -41,6 +42,8 @@ class Menu
         $menu = [];
         $links = [];
 
+        $hasActiveSection = false;
+
         foreach($routes as $route) {
             $items = $route['menu'];
 
@@ -52,6 +55,7 @@ class Menu
 
             if (count($items) === 1) {
                 if (empty($menu[$rootSectionName])) {
+                    $isRootActive = $currentRoute['as'] === $route['as'];
                     $menu[$rootSectionName] = [
                         'title' => $rootSectionName,
                         'icon' => null,
@@ -59,9 +63,13 @@ class Menu
                         'link' => ampere_route($route['as']),
                         'child' => [],
                         'controller' => $route['class'],
-                        'is_active' => $currentRoute['as'] === $route['as'],
+                        'is_active' => $isRootActive,
                         'is_generate' => true
                     ];
+
+                    if ($isRootActive) {
+                        $hasActiveSection = true;
+                    }
                 }
             }
 
@@ -82,6 +90,7 @@ class Menu
                 $isChildActive = $currentRoute['as'] === $route['as'];
                 if ($isChildActive) {
                     $menu[$rootSectionName]['is_active'] = true;
+                    $hasActiveSection = true;
                 }
 
                 $menu[$rootSectionName]['link'] = null;
@@ -93,6 +102,23 @@ class Menu
                     'is_active' => $isChildActive,
                     'is_generate' => true
                 ];
+            }
+        }
+
+        if (!$hasActiveSection) {
+            foreach($menu as $name => $root) {
+                if ($root['route']) {
+                    if (strpos($route['route'], $currentRoute['as']) === 0) {
+                        $menu[$name]['is_active'] = true;
+                    }
+                } else {
+                    foreach($root['child'] as $alias => $child) {
+                        if (strpos($currentRoute['as'], $child['route']) === 0) {
+                            $menu[$name]['child'][$alias]['is_active'] = true;
+                            $menu[$name]['is_active'] = true;
+                        }
+                    }
+                }
             }
         }
 

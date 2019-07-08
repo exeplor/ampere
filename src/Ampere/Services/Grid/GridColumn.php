@@ -32,7 +32,8 @@ class GridColumn
         'date' => false,
         'display' => null,
         'sortable' => false,
-        'export' => true
+        'export' => true,
+        'attribute' => null
     ];
 
     /**
@@ -135,6 +136,16 @@ class GridColumn
     public function column(string $field, string $title = null): self
     {
         return $this->grid->column($field, $title);
+    }
+
+    /**
+     * @param string $attribute
+     * @return GridColumn
+     */
+    public function attribute(string $attribute): self
+    {
+        $this->fields['attribute'] = $attribute;
+        return $this;
     }
 
     /**

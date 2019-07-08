@@ -374,7 +374,7 @@ class Grid
     private function processExportRequest()
     {
         $filter = $this->getQuery();
-        
+
         if (isset($filter['__export'])) {
             $this->dataSource->setLimit($this->exportLimit);
             $this->dataSource->setOffset(0);
@@ -428,7 +428,7 @@ class Grid
         });
 
         if (count($actions) > 0) {
-            $this->column('__actions', '')->export(false)->display(function ($data) use ($actions) {
+            $this->column('__actions', '')->attribute('__actions')->export(false)->display(function ($data) use ($actions) {
                 $columnActions = [];
 
                 foreach($actions as $action) {

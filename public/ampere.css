@@ -452,6 +452,10 @@ table.table tfoot tr td {
     min-width: 70px;
 }
 
+.table.data-table tbody span.empty-field {
+    opacity: 0.2;
+}
+
 .table.data-table .data-table-filter .filter-box input,
 .table.data-table .data-table-filter .filter-box select
 {

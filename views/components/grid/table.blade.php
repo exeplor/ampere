@@ -27,7 +27,7 @@
         <thead>
             <tr>
                 @foreach($columns as $column)
-                <th{!! $column['hasFilter'] ? ' class="data-table-filter"' : null !!}>
+                <th{!! $column['hasFilter'] ? ' class="data-table-filter"' : null !!}{!! $column['attribute'] ? ' data-attribute="' . $column['attribute'] . '"' : null !!}>
 
                     @if($column['hasFilter'])
                         <div class="filter-box" data-column="{{ $column['field'] }}">
