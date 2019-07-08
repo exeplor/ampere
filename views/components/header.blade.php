@@ -36,7 +36,7 @@
                     @endphp
                     @if($hasAccess)
                         <a class="btn btn-{{ $button['type'] ?? 'primary' }}" href="{{ $targetUrl }}">
-                            {{ $button['title'] }}
+                            {!! $button['title'] !!}
                         </a>
                     @endif
                 @endforeach

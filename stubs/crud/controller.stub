@@ -22,7 +22,7 @@ class {controller} extends Controller
         $grid->action('Edit')->primary()->route(self::route('edit'), 'id');
         $grid->action('Delete', 'delete')->danger()->route(self::route('delete'), 'id');
 
-        $grid->model({modelName}::class)->limit(32)->search();
+        $grid->model({modelName}::class)->limit(24)->search();
 
         return $this->render('{view}.index', compact('grid'));
     }

@@ -362,7 +362,7 @@ class Grid
             $component = new Component(new Layout\Builder());
 
             throw new HttpResponseException(response()->json([
-                'rows' => $component->build('grid.rows', ['rows' => $this->getRows()]) . '',
+                'rows' => $component->build('grid.rows', ['rows' => $this->getRows(), 'columns' => $this->getColumns()]) . '',
                 'pagination' => $component->build('grid.pagination', ['pagination' => $this->getPagination()]) . '',
             ]));
         }

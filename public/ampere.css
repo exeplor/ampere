@@ -1,5 +1,5 @@
 body {
-    background-color: #f5f5f5;
+    background-color: #f2f2f2;
     font-family: 'Roboto', sans-serif;
     color: #3d3d3d;
 }
@@ -26,10 +26,10 @@ form {
     border: none;
     border-radius: 5px;
     padding: 8px 14px;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
     font-weight: 400;
     font-size: 14px;
     background: none;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .btn.btn-primary {
@@ -187,8 +187,8 @@ hr {
 #menu .profile {
     display: flex;
     align-items: center;
-    margin: 20px 0px 25px;
-    padding-left: 30px;
+    margin: 20px 0px 24px;
+    padding-left: 25px;
 }
 
 #menu .profile img {
@@ -200,17 +200,19 @@ hr {
 
 #menu .profile .info .name {
     font-weight: 700;
+    color: #42A5F5;
 }
 
 #menu .profile .info .title {
     color: #9E9E9E;
+    margin-top: 5px;
 }
 
 #menu .items .item > a {
     display: block;
     padding: 11px 15px 11px 42px;
-    font-weight: 700;
-    color: #757575;
+    font-weight: 400;
+    color: #767676;
     position: relative;
 }
 
@@ -282,12 +284,12 @@ hr {
 
 #content {
     flex: 1 1 1000px;
-    padding: 20px;
+    padding: 30px;
 }
 
 .ibox {
-    padding: 10px;
     position: relative;
+    padding-bottom: 30px;
 }
 
 .ibox .ibox-header h1,
@@ -305,12 +307,12 @@ hr {
     z-index: 10;
     position: relative;
     padding: 15px 20px;
-    box-shadow: 0px -2px 20px #ededed;
+    box-shadow: 0px -3px 10px #e4eef2;
 }
 
 .ibox .ibox-content {
     background-color: white;
-    box-shadow: 0px 3px 40px #E0E0E0;
+    box-shadow: 0px 3px 10px #e4eef2;
     padding: 20px;
     border-radius: 0px 0px 8px 8px;
     z-index: 9;
@@ -319,7 +321,7 @@ hr {
 
 .ibox .ibox-body {
     background-color: white;
-    box-shadow: 0px 3px 20px #E0E0E0;
+    box-shadow: 0px 3px 10px #e4eef2;
     padding: 20px;
     border-radius: 8px;
 }
@@ -355,6 +357,8 @@ hr {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+    align-items: center;
+    padding-left: 20px;
 }
 
 .header-box .title h1 {
@@ -401,6 +405,11 @@ table.table thead tr th {
 
 table.table tbody tr {
     border-bottom: 1px solid #F5F5F5;
+    position: relative;
+}
+
+table.table tbody tr td {
+    position: relative;
 }
 
 table.table tbody tr:last-child {
@@ -408,7 +417,18 @@ table.table tbody tr:last-child {
 }
 
 table.table tbody tr:hover {
-    background-color: #F5F5F5;
+    background-color: rgba(179,229,252, 0.3);
+}
+
+table.table tbody tr:hover td:first-child::after {
+    content: " ";
+    display: block;
+    height: 100%;
+    width: 3px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    border-left: 3px solid rgba(179,229,252, 1);
 }
 
 table.table tbody tr td {
@@ -428,6 +448,15 @@ table.table tfoot tr td {
     margin: 0px;
 }
 
+.table.data-table tbody tr td[data-attribute=__actions] {
+    max-width: 100px;
+    opacity: 0;
+}
+
+.table.data-table tbody tr:hover td[data-attribute=__actions] {
+    opacity: 1;
+}
+
 .table.data-table .data-table-filter {
     position: relative;
 }
@@ -441,7 +470,7 @@ table.table tfoot tr td {
     height: 100%;
     width: 100%;
     z-index: 2;
-    padding-right: 15px;
+    padding-right: 5px;
 }
 
 .table.data-table label {
@@ -453,7 +482,7 @@ table.table tfoot tr td {
 }
 
 .table.data-table tbody span.empty-field {
-    opacity: 0.2;
+    opacity: 0.15;
 }
 
 .table.data-table .data-table-filter .filter-box input,
@@ -463,7 +492,13 @@ table.table tfoot tr td {
     padding: 5px 0px 5px 20px;
     min-width: 30px;
     border: none;
+    font-weight: 700;
 }
+
+.table.data-table .data-table-filter .filter-box input::placeholder {
+    color: inherit;
+}
+
 .table.data-table .data-table-filter .filter-box select {
     height: auto;
     background: none;
@@ -477,7 +512,7 @@ table.table tfoot tr td {
 
 .table.data-table .data-table-filter .filter-box .data-table-search-icon,
 .table.data-table .data-table-filter .filter-box .data-table-sortable i {
-    opacity: 0.3;
+    opacity: 0.1;
     font-size: 13px;
 }
 
@@ -561,13 +596,13 @@ table.table tfoot tr td {
 .pagination > .active > span,
 .pagination > .active > span:focus,
 .pagination > .active > span:hover {
-    background-color: #66BB6A;
-    color: white;
+    background-color: #eeeeee;
+    color: #7b7b7b;
 }
 
 .pagination > li > a,
 .pagination > li > span {
-    color: #66BB6A;
+    color: #7b7b7b;
     background: none;
 }
 

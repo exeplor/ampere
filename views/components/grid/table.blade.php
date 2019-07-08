@@ -64,7 +64,8 @@
 
         <tbody>
             @php($component->show('grid.rows', [
-                'rows' => $rows
+                'rows' => $rows,
+                'columns' => $columns
             ]))
         </tbody>
 

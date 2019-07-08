@@ -16,7 +16,7 @@
         'create' => [
             'title' => 'Create new {modelTitle}',
             'route' => \{controller}::route('create'),
-            'type' => 'success'
+            'type' => 'primary'
         ]
     ]
 ]))

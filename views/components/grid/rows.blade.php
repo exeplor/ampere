@@ -1,16 +1,17 @@
 <?php
     /**
      * @var array $rows
+     * @var \Ampere\Services\Grid\GridColumn[] $columns
      */
 ?>
 @foreach($rows as $row)
     <tr{!! isset($row['id']) ? ' data-id="' . $row['id'] . '"' : null !!}>
-        @foreach($row as $field => $value)
-            <td>
-                @if(strlen($value) === 0)
+        @foreach($columns as $field => $column)
+            <td{!! ($attribute = $column['attribute']) ? ' data-attribute="' . $attribute . '"' : null  !!}>
+                @if(strlen($row[$field]) === 0)
                     <span class="empty-field">(empty)</span>
                 @else
-                    {!! $value !!}
+                    {!! $row[$field] !!}
                 @endif
             </td>
         @endforeach
