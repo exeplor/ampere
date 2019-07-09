@@ -11,8 +11,6 @@
      */
 
     $id = 'select_' . \Str::random(32);
-
-// $source->execute();
 ?>
 <select class="form-control" name="{{ $name . ($multiple ? '[]' : null) }}" id="{{ $id }}"{{ $disabled ? ' disabled' :null }}{{$multiple ? ' multiple="multiple"' : null}}>
     @if($source && empty($options) && $value)

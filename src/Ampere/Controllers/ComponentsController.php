@@ -25,6 +25,14 @@ class ComponentsController extends Controller
     }
 
     /**
+     * @menu Charts
+     */
+    public function charts()
+    {
+        return $this->render('components.charts', $charts);
+    }
+
+    /**
      * @post form
      */
     public function search()
