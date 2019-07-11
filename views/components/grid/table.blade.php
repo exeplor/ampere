@@ -2,9 +2,8 @@
 
     /**
      * @var \Ampere\Services\Grid\Grid $grid
-     * @var \Closure $includeStyle
-     * @var \Closure $includeScript
      * @var \Ampere\Services\Workshop\Page\Assets $include
+     * @var \Ampere\Services\Workshop\Component $component
      */
 
     $columns = $grid->getColumns();

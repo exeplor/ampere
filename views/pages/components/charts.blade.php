@@ -21,5 +21,12 @@
      ])
 ?>
 
+<div class="row">
+    <div class="col-md-6">
+        {!! $component->chart('First example', $data->charts['first']) !!}
+    </div>
 
-
+    <div class="col-md-6">
+        {!! $component->chart('Second example', $data->charts['second']) !!}
+    </div>
+</div>

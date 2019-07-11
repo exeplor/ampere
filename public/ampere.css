@@ -687,3 +687,45 @@ table.table tfoot tr td {
     border-radius: 3px;
     color: rgba(0, 0, 0, 0.5);
 }
+
+.chart-box .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chart-box .chart-header .chart-title {
+    font-size: 18px;
+}
+
+.chart-box canvas {
+    margin-top: 20px;
+}
+
+.chart-box .chart-header .chart-filter .chart-filter-group {
+    opacity: 0.5;
+    display: flex;
+    align-items: center;
+}
+
+.chart-box:hover .chart-header .chart-filter .chart-filter-group {
+    opacity: 1;
+}
+
+.chart-box .chart-header .chart-filter .chart-filter-calendar {
+    font-size: 13px;
+}
+
+.chart-box .chart-header .chart-filter .chart-filter-calendar {
+    border: none;
+    background: none;
+    margin-right: 5px;
+}
+
+.chart-box .chart-header .chart-filter .chart-filter-calendar i {
+    margin-right: 10px;
+}
+
+.chart-box .chart-header .chart-filter .select2 {
+    margin-top: -5px;
+}

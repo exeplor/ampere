@@ -1,7 +1,6 @@
 <?php
     /**
      * @var string $label
-     * @var string $component Component content
      * @var string $error Error message
      */
 ?>

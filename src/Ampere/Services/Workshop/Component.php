@@ -2,6 +2,7 @@
 
 namespace Ampere\Services\Workshop;
 
+use Ampere\Services\Chart\ChartMap;
 use Ampere\Services\Grid\Grid;
 use Ampere\Services\Workshop\Layout\Builder;
 
@@ -79,6 +80,18 @@ class Component
     }
 
     /**
+     * @param string|null $title
+     * @param ChartMap $chart
+     */
+    public function chart(string $title = null, ChartMap $chart)
+    {
+        $this->show('chart.wrap', [
+            'chart' => $chart,
+            'title' => $title
+        ]);
+    }
+
+    /**
      * @param string $view
      * @param array $basicParams
      * @param array $extendedParams
@@ -86,7 +99,6 @@ class Component
      */
     public function build(string $view, array $basicParams = [], array $extendedParams = [])
     {
-        # $componentView = ampere_config('views.name') . '.components.' . $view;
         $params = array_merge($basicParams, $extendedParams);
 
         $params['component'] = $this;

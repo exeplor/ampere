@@ -173,3 +173,21 @@ function dataTable(tableId) {
         }
     }
 }
+
+function updateChart(name, field, value)
+{
+    var object = $('.chart-container[data-chart-name=' + name + ']');
+    var filter = object.attr('data-filter') ? JSON.parse(object.attr('data-filter')) : {};
+
+    filter[field] = value;
+
+    object.attr('data-filter', JSON.stringify(filter));
+
+    var data = {};
+    data['chart__' + name] = filter;
+
+    $.get('', data, function(content){
+        object.html(content);
+    });
+
+}

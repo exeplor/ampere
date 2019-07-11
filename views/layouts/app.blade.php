@@ -36,6 +36,7 @@
 
         @php($layout->js('vendor/select2/js/select2.min.js'))
         @php($layout->js('vendor/toastr/toastr.min.js'))
+        @php($layout->js('vendor/chart/chart.js'))
         @php($layout->js('ampere.js'))
 
         <title>{!! $layout->getTitle() !!}</title>
