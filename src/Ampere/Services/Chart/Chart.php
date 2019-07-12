@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
  */
 class Chart
 {
+    const TYPE_LINE = 'line';
+    const TYPE_BAR = 'bar';
+
     /**
      * @var Request
      */
@@ -41,11 +44,16 @@ class Chart
     /**
      * @var array
      */
-    public $options = [
+    private $options = [
         'fill' => false,
         'border' => 2,
         'showSum' => false
     ];
+
+    /**
+     * @var string
+     */
+    private $type = self::TYPE_LINE;
 
     /**
      * @param string $name
@@ -79,6 +87,24 @@ class Chart
     public function name(string $name): self
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return Chart
+     */
+    public function line(): self
+    {
+        $this->type = self::TYPE_LINE;
+        return $this;
+    }
+
+    /**
+     * @return Chart
+     */
+    public function bar(): self
+    {
+        $this->type = self::TYPE_BAR;
         return $this;
     }
 
@@ -171,7 +197,7 @@ class Chart
             ];
         }
 
-        $chartMap = new ChartMap($this->name, $labels, $datasets, $this->filter->getOriginalFilters(), $this->options);
+        $chartMap = new ChartMap($this->name, $labels, $datasets, $this->filter->getOriginalFilters(), $this->options, $this->type);
 
         if ($this->isAjaxRequest()) {
             $component = new Component(new Builder());

@@ -11,10 +11,11 @@
 
 <script>
     $(function(){
+        var progress = document.getElementById('animationProgress_{{ $id }}');
         var ctx = document.getElementById('{{ $id }}').getContext('2d');
         var chart = new Chart(ctx, {
             // The type of chart we want to create
-            type: 'line',
+            type: '{{ $chart->type }}',
 
             // The data for our dataset
             data: {

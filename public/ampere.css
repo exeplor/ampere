@@ -727,5 +727,5 @@ table.table tfoot tr td {
 }
 
 .chart-box .chart-header .chart-filter .select2 {
-    margin-top: -5px;
+    margin: -4px 0px;
 }

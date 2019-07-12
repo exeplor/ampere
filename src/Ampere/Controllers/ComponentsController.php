@@ -79,6 +79,8 @@ class ComponentsController extends Controller
                 'fill' => true
             ]);
 
+            $chart->bar();
+
             $chart->add('Conversion', [
                 '01/01' => 5,
                 '01/02' => rand(10, 30),

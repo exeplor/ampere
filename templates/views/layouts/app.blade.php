@@ -36,6 +36,7 @@
 
         @php($layout->js('vendor/select2/js/select2.min.js'))
         @php($layout->js('vendor/toastr/toastr.min.js'))
+        @php($layout->js('vendor/chart/chart.js'))
         @php($layout->js('ampere.js'))
 
         <title>{!! $layout->getTitle() !!}</title>
@@ -48,7 +49,7 @@
                 </div>
 
                 <div class="profile">
-                    <img src="{{ ampere_public_path('images/face.jpg') }}">
+                    <img src="{{ ampere_public_path('images/face.png') }}">
                     <div class="info">
                         <div class="name">Developer</div>
                         <div class="title">{{ $user->email }}</div>
@@ -79,15 +80,6 @@
             </div>
 
             <div id="content">
-                <div class="ibox">
-                    <div class="ibox-body smart-search-ext">
-                        <button class="btn">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <input placeholder="Smart search...">
-                    </div>
-                </div>
-
                 {!! $layout->getContent() !!}
             </div>
 

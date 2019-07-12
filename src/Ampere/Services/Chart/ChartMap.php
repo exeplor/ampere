@@ -10,6 +10,7 @@ namespace Ampere\Services\Chart;
  * @property-read array $filters
  * @property-read array $options
  * @property-read string $name
+ * @property-read string $type
  *
  * @package Ampere\Services\Chart
  */
@@ -34,13 +35,14 @@ class ChartMap
      * @param array $filters
      * @param array $options
      */
-    public function __construct(string $name, array $labels, array $datasets, array $filters, array $options = [])
+    public function __construct(string $name, array $labels, array $datasets, array $filters, array $options, string $type)
     {
         $this->fields['labels'] = $labels;
         $this->fields['datasets'] = $datasets;
         $this->fields['filters'] = $filters;
         $this->fields['options'] = $options;
         $this->fields['name'] = $name;
+        $this->fields['type'] = $type;
     }
 
     /**
