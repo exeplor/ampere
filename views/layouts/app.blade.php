@@ -51,7 +51,7 @@
                 <div class="profile">
                     <img src="{{ ampere_public_path('images/face.png') }}">
                     <div class="info">
-                        <div class="name">Developer</div>
+                        <div class="name">{{ $user->roles->first()->title }}</div>
                         <div class="title">{{ $user->email }}</div>
                     </div>
                 </div>

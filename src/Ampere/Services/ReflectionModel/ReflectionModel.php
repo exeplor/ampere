@@ -34,6 +34,11 @@ class ReflectionModel
     private $relationWithoutField = [];
 
     /**
+     * @var array
+     */
+    private static $modelReference = [];
+
+    /**
      * ReflectionModel constructor.
      * @param string $modelClass
      */
@@ -132,6 +137,11 @@ class ReflectionModel
         $relations = [];
 
         foreach($classMethods as $method) {
+            $reflectionMethod = new \ReflectionMethod($this->model, $method->getName());
+            if (!preg_match('/@return.+?BelongsTo/i', $reflectionMethod->getDocComment())) {
+                continue;
+            }
+
             $relation = $this->model->{$method->getName()}();
             if ($relation instanceof Relation) {
                 if ($relation instanceof BelongsTo) {
@@ -161,8 +171,14 @@ class ReflectionModel
             if (isset($relations[$field->getName()])) {
                 $relation = $relations[$field->getName()];
 
-                $reflectionModel = new self(get_class($relation['model']));
-                $reflectionModel->load();
+                $className = get_class($relation['model']);
+
+                if (empty(self::$modelReference[$className])) {
+                    self::$modelReference[$className] = new self(get_class($relation['model']));
+                    self::$modelReference[$className]->load();
+                }
+
+                $reflectionModel = self::$modelReference[$className];
 
                 $field->setRelation($relation['method'], $reflectionModel);
             }

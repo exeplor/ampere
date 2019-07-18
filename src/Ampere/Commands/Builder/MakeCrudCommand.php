@@ -230,8 +230,7 @@ class MakeCrudCommand extends Command
 
         if ($this->stubBuilder->isFileExists()) {
             $this->error('Controller ' . $controllerPath . ' already exists');
-            # $answer = $this->ask('You really want to rewrite this file? (enter "yes" for accept)');
-            $answer = 'yes';
+            $answer = $this->ask('You really want to rewrite this file? (enter "yes" for accept)');
 
             if ($answer !== 'yes') {
                 $this->comment('Controller not created');
@@ -261,7 +260,7 @@ class MakeCrudCommand extends Command
             'view' => implode('.', $this->getControllerNamePath(true))
         ];
 
-        $viewFolderPath = resource_path('views/'. ampere_prefix('/pages/') . str_replace('.', '/', $params['view'])) . '/';
+        $viewFolderPath = resource_path('views/'. ampere_config('views.name') . '/pages/' . str_replace('.', '/', $params['view'])) . '/';
         $this->stubBuilder->setStub('crud/index.view')
             ->setTargetPath($viewFolderPath . 'index.blade.php');
 
@@ -535,7 +534,9 @@ class MakeCrudCommand extends Command
      */
     private function getUsedControllersTemplate(): string
     {
-        $controllers = array_unique($this->usedControllers);
+        $list = array_diff($this->usedControllers, [$this->model->getClassName()]);
+
+        $controllers = array_unique($list);
         $controllers = array_map(function ($name) {
             return 'use ' . $name . ';';
         }, $controllers);
