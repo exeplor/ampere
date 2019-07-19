@@ -18,7 +18,9 @@
      $component->show('header', [
          'title' => 'Form components',
          'subtitle' => 'Components overview'
-     ])
+     ]);
+
+     $controllerClass = ampere_controller('ComponentsController');
 ?>
 
 <div class="row">
@@ -112,7 +114,7 @@
                         ->tags()
                         ->multiple()
                         ->placeholder('Select from source')
-                        ->source(\App\Http\Controllers\Ampere\ComponentsController::route('search'))
+                        ->source($controllerClass::route('search'))
                 !!}
 
                 {!! $form->close() !!}
