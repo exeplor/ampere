@@ -31,7 +31,12 @@ return [
         /*
          * Space route prefix
          */
-        'prefix' => '{route_prefix}'
+        'prefix' => '{route_prefix}',
+
+        /*
+         * Custom route group
+         */
+        'group' => []
     ],
 
     /*
