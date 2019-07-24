@@ -75,11 +75,9 @@ class AmpereServiceProvider extends ServiceProvider
         if ($ampereSpace = $this->getCurrentAmpereSpace()) {
 
             if (!app()->runningInConsole()) {
-
                 Config::useSpace($ampereSpace);
                 $this->loadRoutesFrom(__DIR__ . '/routes.php');
                 $this->app['view']->addNamespace('ampere', ampere_path('views'));
-
             }
         }
     }

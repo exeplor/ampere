@@ -118,7 +118,7 @@ class Guard
             return true;
         }
 
-        if (isset($permissions['#']) || isset($permissions['*'])) {
+        if (isset($permissions['*'])) {
             return true;
         }
 

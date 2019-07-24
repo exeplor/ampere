@@ -26,6 +26,25 @@ class Menu
         $menu = $this->merge($basicMenu, $customMenu);
         $this->saveCustomMenu($menu);
 
+        foreach($menu as $alias => $root) {
+
+            if (empty($root['child'])) {
+                if (!$root['access']) {
+                    unset($menu[$alias]);
+                }
+            } else {
+                foreach($root['child'] as $name => $child) {
+                    if (!$child['access']) {
+                        unset($menu[$alias]['child'][$name]);
+                    }
+                }
+
+                if (empty($menu[$alias]['child'])) {
+                    unset($menu[$alias]);
+                }
+            }
+        }
+
         return $menu;
     }
 
@@ -35,6 +54,7 @@ class Menu
     private function generate(): array
     {
         $router = Ampere::router();
+        $guard = Ampere::guard();
 
         $currentRoute = $router->getCurrentRouteInfo();
         $routes = $router->getRoutes();
@@ -119,6 +139,22 @@ class Menu
                         }
                     }
                 }
+            }
+        }
+
+        foreach($menu as $name => $root) {
+            if ($root['route']) {
+                $menu[$name]['access'] = $guard->hasAccess($root['route']);
+            } else {
+                foreach($root['child'] as $alias => $child) {
+                    $menu[$name]['child'][$alias]['access'] = $guard->hasAccess($child['route']);
+                }
+
+                $access = array_filter($menu[$name]['child'], function($child){
+                    return $child['access'];
+                });
+
+                $menu[$name]['access'] = count($access) > 0;
             }
         }
 
