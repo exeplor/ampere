@@ -18,7 +18,8 @@ class LoginController extends Controller
     public function index()
     {
         if (Ampere::guard()->getUser()) {
-            return $this->redirect(IndexController::route('home'));
+            $controller = ampere_controller('IndexController');
+            return $this->redirect($controller::route('home'));
         }
 
         return $this->render('login');

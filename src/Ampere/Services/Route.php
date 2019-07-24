@@ -49,9 +49,9 @@ class Route
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function route(): string
+    public function route(): ?string
     {
         $routes = Ampere::router()->getRoutes();
         return $routes[$this->className . '@' . $this->methodName]['as'] ?? null;
