@@ -452,7 +452,13 @@ class Grid
                         $href = $route($data);
                     }
 
-                    $columnActions[] = '<a class="btn btn-' . $params['level'] . '" href="' . $href . '"' . ($params['attribute'] ? ' data-name="' . $params['attribute'] . '"' : null) . '>' . $params['title'] . '</a>';
+                    $title = $params['title'];
+
+                    if (preg_match('/^icon:(.+)$/', $title, $match)) {
+                        $title = '<i class="fa fa-' . $match[1] . '"></i>';
+                    }
+
+                    $columnActions[] = '<a class="btn btn-' . $params['level'] . '" href="' . $href . '"' . ($params['attribute'] ? ' data-name="' . $params['attribute'] . '"' : null) . '>' . $title . '</a>';
                 }
 
                 return '<div align="right">' . implode('&nbsp;&nbsp;', $columnActions) . '</div>';

@@ -57,7 +57,12 @@ class ChartFilter
      */
     public function getStartDate(): ?string
     {
-        return $this->filters['__dateRange']['options']['start'] ?? null;
+        $date = $this->filters['__dateRange']['options']['start'] ?? null;
+        if ($filter = $this->getValue('__dateRange')) {
+            return explode(' - ', $filter)[0];
+        }
+
+        return $date;
     }
 
     /**
@@ -65,7 +70,12 @@ class ChartFilter
      */
     public function getEndDate(): ?string
     {
-        return $this->filters['__dateRange']['options']['end'] ?? null;
+        $date = $this->filters['__dateRange']['options']['end'] ?? null;
+        if ($filter = $this->getValue('__dateRange')) {
+            return explode(' - ', $filter)[1];
+        }
+
+        return $date;
     }
 
     /**
@@ -88,7 +98,7 @@ class ChartFilter
         }
 
         $requestFilters = $this->chart->getRequestFilters();
-        $requestFilter = $requestFilter[$filterName] ?? null;
+        $requestFilter = $requestFilters[$filterName] ?? null;
 
         if ($requestFilter) {
             return $requestFilter;

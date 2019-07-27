@@ -47,7 +47,8 @@ class Chart
     private $options = [
         'fill' => false,
         'border' => 2,
-        'showSum' => false
+        'showSum' => false,
+        'colorOffset' => 0
     ];
 
     /**

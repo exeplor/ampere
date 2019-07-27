@@ -5,6 +5,8 @@
 
     $id = 'chart_' . \Illuminate\Support\Str::random(32);
     $colors = ['#2196F3', '#FF5722', '#3F51B5', '#009688', '#FFC107'];
+    $offset = $chart->options['colorOffset'];
+    $colors = array_merge(array_splice($colors, $offset), $colors);
 ?>
 
 <canvas id="{{ $id }}"></canvas>
