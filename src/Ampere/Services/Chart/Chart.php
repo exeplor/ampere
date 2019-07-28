@@ -48,7 +48,8 @@ class Chart
         'fill' => false,
         'border' => 2,
         'showSum' => false,
-        'colorOffset' => 0
+        'colorOffset' => 0,
+        'transparent' => false
     ];
 
     /**

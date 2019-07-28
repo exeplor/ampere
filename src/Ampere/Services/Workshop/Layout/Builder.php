@@ -132,7 +132,7 @@ class Builder
      */
     public function getCssAssets(): array
     {
-        return $this->styleAssets;
+        return array_unique($this->styleAssets);
     }
 
     /**
@@ -140,7 +140,7 @@ class Builder
      */
     public function getJsAssets(): array
     {
-        return $this->scriptAssets;
+        return array_unique($this->scriptAssets);
     }
 
     /**

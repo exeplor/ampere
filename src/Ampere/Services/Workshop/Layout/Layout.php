@@ -47,7 +47,7 @@ class Layout
     {
         $assets = $this->builder->getCssAssets();
         return array_map(function($path){
-            return ampere_public_path($path);
+            return preg_match('/^http/', $path) ? $path : ampere_public_path($path);
         }, $assets);
     }
 
@@ -58,7 +58,7 @@ class Layout
     {
         $assets = $this->builder->getJsAssets();
         return array_map(function($path){
-            return ampere_public_path($path);
+            return preg_match('/^http/', $path) ? $path : ampere_public_path($path);
         }, $assets);
     }
 
