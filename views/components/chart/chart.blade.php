@@ -29,7 +29,7 @@
                         @foreach($chart->datasets as $id => $dataset)
                     {
                         label: '{{ $dataset['label'] }}{!! $chart->options['showSum'] ? ' (' . array_sum($dataset['data']) . ')' : null !!}',
-                        backgroundColor: 'rgba({{ implode(', ', sscanf($colors[$id], '#%02x%02x%02x')) }}, {{ $chart->options['transparent'] ? '0.2' : 1 }})',
+                        backgroundColor: 'rgba({{ implode(', ', sscanf($colors[$id], '#%02x%02x%02x')) }}, {{ $chart->options['transparent'] ? '0.3' : 1 }})',
                         borderColor: '{{ $colors[$id] }}',
                         data: [{!! implode(', ', $dataset['data'])!!}],
                         borderWidth: {{ $chart->options['border'] }},
