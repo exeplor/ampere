@@ -28,9 +28,7 @@
     </head>
     <body>
         <div class="main-container">
-            <div id="content">
                 {!! $layout->getContent() !!}
-            </div>
         </div>
     </body>
 </html>
