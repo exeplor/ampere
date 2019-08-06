@@ -231,7 +231,7 @@ class Grid
                 if (count($fields) === 2) {
                     $value = $row->{$fields[0]} ? $row->{$fields[0]}->{$fields[1]} : null;
                 } else {
-                    $value = $row->$field;
+                    $value = isset($row[$field]) ? $row[$field] : null;
                 }
 
                 if ($dropdown = $column->get('dropdown')) {

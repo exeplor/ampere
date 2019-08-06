@@ -12,7 +12,7 @@
 
     $id = 'select_' . \Str::random(32);
 ?>
-<select class="form-control" name="{{ $name . ($multiple ? '[]' : null) }}" id="{{ $id }}"{{ $disabled ? ' disabled' :null }}{{$multiple ? ' multiple="multiple"' : null}}>
+<select class="form-control" name="{{ $name . ($multiple ? '[]' : null) }}" id="{{ $id }}"{{ $disabled ? ' disabled' :null }}{!! $multiple ? ' multiple="multiple"' : null !!}>
     @if($source && empty($options) && $value)
         @if(is_array($value))
             @foreach($value as $val)
@@ -23,8 +23,10 @@
         @endif
     @endif
 
+
+        @php($list = explode(',', $value))
     @foreach($options as $key => $title)
-        <option value="{{ $key }}"{!! $key == $value ? ' selected' : null !!}>{{ $title }}</option>
+        <option value="{{ $key }}"{!! in_array($key, $list) ? ' selected' : null !!}>{{ $title }}</option>
     @endforeach
 </select>
 
