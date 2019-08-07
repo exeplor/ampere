@@ -24,7 +24,7 @@
     @endif
 
 
-        @php($list = explode(',', $value))
+        @php($list = is_array($value) ? $value : explode(',', $value))
     @foreach($options as $key => $title)
         <option value="{{ $key }}"{!! in_array($key, $list) ? ' selected' : null !!}>{{ $title }}</option>
     @endforeach
