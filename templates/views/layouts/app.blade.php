@@ -20,6 +20,7 @@
         @php($layout->css('vendor/select2/css/select2.min.css'))
         @php($layout->css('vendor/toastr/toastr.min.css'))
         @php($layout->css('ampere.css'))
+        @php($layout->css('custom.css'))
 
         @foreach($layout->getCustomCss() as $css)
             <link rel="stylesheet" href="{{ $css }}">
