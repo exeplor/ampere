@@ -33,8 +33,30 @@ class InputComponent extends FormComponent
         'mask' => null,
         'group' => false,
         'groupInline' => false,
-        'type' => 'text'
+        'type' => 'text',
+        'addon' => null,
+        'autocomplete' => false
     ];
+
+    /**
+     * @param bool $autocomplete
+     * @return InputComponent
+     */
+    public function autocomplete(bool $autocomplete): self
+    {
+        $this->params['autocomplete'] = $autocomplete;
+        return $this;
+    }
+
+    /**
+     * @param string $text
+     * @return InputComponent
+     */
+    public function addon(string $text): self
+    {
+        $this->params['addon'] = $text;
+        return $this;
+    }
 
     /**
      * @param string $pattern

@@ -37,6 +37,15 @@ class Config
     }
 
     /**
+     * @param string $space
+     * @return array|null
+     */
+    public static function getSpace(string $space): ?array
+    {
+        return config('ampere.' . $space, []);
+    }
+
+    /**
      * @param string $name
      * @return bool
      */

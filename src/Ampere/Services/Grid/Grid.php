@@ -120,12 +120,17 @@ class Grid
 
     /**
      * @param string $class
+     * @param \Closure|null $query
      * @return Grid
      */
-    public function model(string $class): self
+    public function model(string $class, \Closure $query = null): self
     {
         $this->dataSource = new ModelDataSource($this);
         $this->dataSource->setModel($class);
+        if ($query) {
+            $this->dataSource->setQuery($query);
+        }
+
         return $this;
     }
 

@@ -4,6 +4,7 @@ namespace Ampere\Facades;
 
 use Ampere\Services\Guard;
 use Ampere\Services\Router;
+use App\Models\User;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Facade;
  *
  * @method static Guard guard()
  * @method static Router router()
+ * @method static User user()
  *
  * @package Encore\Admin\Facades
  */

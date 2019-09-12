@@ -80,7 +80,7 @@ class Controller extends BaseController
             throw new HttpResponseException(back()->withErrors($validator)->withInput());
         }
 
-        return $validator->getData();
+        return collect($validator->getData())->only(array_keys($rules))->toArray();
     }
 
     /**

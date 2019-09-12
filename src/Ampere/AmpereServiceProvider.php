@@ -6,7 +6,9 @@ use Ampere\Commands\Builder\MakeCrudCommand;
 use Ampere\Commands\Builder\MakePageCommand;
 use Ampere\Commands\InstallCommand;
 use Ampere\Commands\MigrateCommand;
+use Ampere\Models\User;
 use Ampere\Services\Config;
+use App\Models\Agent;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -72,13 +74,19 @@ class AmpereServiceProvider extends ServiceProvider
             app('router')->middlewareGroup($key, $middleware);
         }
 
-        if ($ampereSpace = $this->getCurrentAmpereSpace()) {
+        $ampereSpace = $this->getCurrentAmpereSpace();
 
-            if (!app()->runningInConsole()) {
-                Config::useSpace($ampereSpace);
+        if (app()->runningInConsole()) {
+            $spaces = array_keys(Config::getSpaces());
+            if (count($spaces) > 0) {
+                Config::useSpace($spaces[0]);
                 $this->loadRoutesFrom(__DIR__ . '/routes.php');
-                $this->app['view']->addNamespace('ampere', ampere_path('views'));
             }
+        } else if ($ampereSpace = $this->getCurrentAmpereSpace()) {
+
+            Config::useSpace($ampereSpace);
+            $this->loadRoutesFrom(__DIR__ . '/routes.php');
+            $this->app['view']->addNamespace('ampere', ampere_path('views'));
         }
     }
 
@@ -93,14 +101,9 @@ class AmpereServiceProvider extends ServiceProvider
             return null;
         }
 
-        if (count($spaces) === 1) {
-            return array_keys($spaces)[0];
-
-        } else {
-            foreach($spaces as $name => $space) {
-                if (strpos(request()->path(), $space['app']['url_prefix']) === 0) {
-                    return $name;
-                }
+        foreach($spaces as $name => $space) {
+            if (strpos(request()->path(), $space['app']['url_prefix']) === 0) {
+                return $name;
             }
         }
 

@@ -2,6 +2,7 @@
 
 namespace Ampere\Models;
 
+use Ampere\Services\Config;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
 /**

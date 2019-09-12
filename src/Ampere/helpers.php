@@ -87,3 +87,15 @@ if (!function_exists('ampere_controller')) {
     }
 
 }
+
+if (!function_exists('ampere')) {
+
+    /**
+     * @return \Ampere\Ampere
+     */
+    function ampere()
+    {
+        return resolve(\Ampere\Ampere::class);
+    }
+
+}

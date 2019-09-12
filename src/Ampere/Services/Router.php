@@ -127,7 +127,7 @@ class Router
 
                 $route = $this->buildRoute($class['class'], $methodName, $controller, $method, $routes);
 
-                if ($route['function'] === '__construct') {
+                if (empty($route) || $route['function'] === '__construct') {
                     continue;
                 }
 
@@ -153,9 +153,13 @@ class Router
         $controllerAs = $classAnnotations['as'];
 
         if (empty($controllerRoute)) {
-            $pattern = preg_quote(ampere_config('routing.namespace')) . '\\\(.+?)Controller';
+            $pattern = preg_quote(ampere_config('routing.namespace')) . '\\\(.*?)Controller';
             if (!preg_match('#' . $pattern . '#', $className, $match)) {
                 throw new \Exception('Bad class name');
+            }
+
+            if (empty($match[1])) {
+                return [];
             }
 
             $controllerRoute = str_replace('\\', '/', strtolower($match[1]));

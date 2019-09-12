@@ -18,6 +18,11 @@ class ModelDataSource extends DataSource
     private $model;
 
     /**
+     * @var \Closure
+     */
+    private $query;
+
+    /**
      * @param string $class
      * @return ModelDataSource
      */
@@ -25,6 +30,16 @@ class ModelDataSource extends DataSource
     {
         $this->name = (new $class)->getTable();
         $this->model = $class;
+        return $this;
+    }
+
+    /**
+     * @param \Closure $filter
+     * @return ModelDataSource
+     */
+    public function setQuery(\Closure $query): self
+    {
+        $this->query = $query;
         return $this;
     }
 
@@ -44,6 +59,11 @@ class ModelDataSource extends DataSource
         $query = $this->buildQuery()
             ->take($this->limit)
             ->offset($this->offset);
+
+        $modelQuery = $this->query;
+        if ($modelQuery) {
+            $modelQuery($query);
+        }
 
         return $query->getModels();
     }

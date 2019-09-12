@@ -38,7 +38,7 @@ class MakePageCommand extends Command
     {
         $pageName = $this->argument('name');
 
-        $targetTemplatePath = ampere_prefix('/pages/' . $pageName . '.blade.php');
+        $targetTemplatePath = ampere_config('views.name') . '/pages/' . $pageName . '.blade.php';
         $targetPath = resource_path('views/' . $targetTemplatePath);
 
         $stubBuilder->setStub('page')
