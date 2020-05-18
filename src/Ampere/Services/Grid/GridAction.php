@@ -23,7 +23,8 @@ class GridAction
         'routeParams' => null,
         'title' => null,
         'level' => self::LEVEL_DEFAULT,
-        'attribute' => null
+        'attribute' => null,
+        'visible' => null
     ];
 
     /**
@@ -91,5 +92,15 @@ class GridAction
     public function getData(): array
     {
         return $this->params;
+    }
+
+    /**
+     * @param \Closure $visible
+     * @return $this
+     */
+    public function visible(\Closure $visible): self
+    {
+        $this->params['visible'] = $visible;
+        return $this;
     }
 }

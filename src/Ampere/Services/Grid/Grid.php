@@ -112,7 +112,7 @@ class Grid
      * @param bool $enabled
      * @return Grid
      */
-    public function export(bool $enabled): self
+    public function export(bool $enabled): Grid
     {
         $this->exportEnabled = $enabled;
         return $this;
@@ -344,12 +344,23 @@ class Grid
     }
 
     /**
-     * @return null|string
+     * @return string|null
+     * @throws \Exception
      */
     private function getSortDirection(): ?string
     {
         $filter = $this->getQuery();
-        $sortDirection = strtoupper($filter['sort']['direction'] ?? GridColumn::SORT_ASC);
+
+        $sortDirection = GridColumn::SORT_ASC;
+
+        if (empty($filter['sort']['direction'])) {
+            if ($field = $this->getSortField()) {
+                $column = $this->columns[$field];
+                $sortDirection = $column->get('sortDirection');
+            }
+        } else {
+            $sortDirection = strtoupper($filter['sort']['direction']);
+        }
 
         if (!in_array($sortDirection, [GridColumn::SORT_ASC, GridColumn::SORT_DESC])) {
             throw new \Exception('Incorrect sort direction "' . $sortDirection . '"');
@@ -438,6 +449,10 @@ class Grid
 
                 foreach($actions as $action) {
                     $params = $action->getData();
+
+                    if ($params['visible'] && !$params['visible']($data)) {
+                        continue;
+                    }
 
                     $route = $params['route'];
                     $routeParams = $params['routeParams'];

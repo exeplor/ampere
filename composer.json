@@ -1,24 +1,24 @@
 {
-  "name": "exeplor/ampere",
-  "description": "Laravel Ampere",
-  "keywords": ["laravel", "ampere"],
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Exeplor",
-      "email": "exeplor@gmail.com"
-    }
-  ],
-  "require": {
-    "php": "^7.4",
-    "laravel/framework": "^6.2"
-  },
-  "autoload": {
-    "psr-4": {
-      "Ampere\\": "src/Ampere"
+    "name": "exeplor/ampere",
+    "description": "Laravel Ampere",
+    "keywords": ["laravel", "ampere"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Exeplor",
+            "email": "exeplor@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "laravel/framework": "^7.0"
     },
-    "files": [
-      "src/Ampere/helpers.php"
-    ]
-  }
+    "autoload": {
+        "psr-4": {
+            "Ampere\\": "src/Ampere"
+        },
+        "files": [
+            "src/Ampere/helpers.php"
+        ]
+    }
 }

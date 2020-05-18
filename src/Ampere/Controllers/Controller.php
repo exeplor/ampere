@@ -39,6 +39,18 @@ class Controller extends BaseController
     {
         $this->request = $request;
         $this->workshop = $workshop;
+        $this->middleware(function($request, $closure){
+            $this->boot();
+            return $closure($request);
+        });
+    }
+
+    /**
+     * @return void
+     */
+    protected function boot()
+    {
+
     }
 
     /**

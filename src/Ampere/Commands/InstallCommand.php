@@ -120,7 +120,7 @@ class InstallCommand extends Command
 
         $this->warn('Good. Now you need to define namespace of your controllers (skip to default).');
         $value = readline(" > \e[0;36;40m" . $this->getNamespace('') . "\e[0m");
-        $value = array_filter(explode(' ', ucwords(implode(' ', preg_split('#/|\\\#', preg_replace('/[^a-z\\/\\\]/', '', $value))))));
+        $value = array_filter(explode(' ', ucwords(implode(' ', preg_split('#/|\\\#', preg_replace('~[^a-z/\\\]~', '', $value))))));
 
         $config['config']['space'] = implode('/', $value);
         $config['config']['namespace'] = implode('\\', $value);

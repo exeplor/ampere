@@ -62,14 +62,16 @@ class SelectSearch
      * @param string $model
      * @param array $fields
      * @param string $key
-     * @return SelectSearch
+     * @param \Closure|null $filter
+     * @return $this
      */
-    public function add(string $field, string $model, array $fields, string $key): self
+    public function add(string $field, string $model, array $fields, string $key, \Closure $filter = null): self
     {
         $this->sources[$field] = (object)[
             'model' => $model,
             'fields' => $fields,
-            'key' => $key
+            'key' => $key,
+            'filter' => $filter
         ];
 
         return $this;
@@ -104,6 +106,11 @@ class SelectSearch
         } else {
             foreach ($source->fields as $field) {
                 $query->orWhere($field, 'LIKE', '%' . $this->query . '%');
+            }
+
+            if ($source->filter) {
+                $filter = $source->filter;
+                $filter($query);
             }
         }
 

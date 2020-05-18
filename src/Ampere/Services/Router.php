@@ -14,6 +14,7 @@ class Router
     const METHOD_POST = 'post';
     const METHOD_PUT = 'put';
     const METHOD_DELETE = 'delete';
+    const METHOD_ANY = 'any';
 
     /**
      * @var array
@@ -117,11 +118,13 @@ class Router
                     'parentRoute' => null
                 ];
 
-                $availableMethods = [self::METHOD_POST, self::METHOD_PUT, self::METHOD_DELETE];
+                $usedMethods = [];
+                $availableMethods = [self::METHOD_ANY, self::METHOD_POST, self::METHOD_PUT, self::METHOD_DELETE];
                 foreach($availableMethods as $targetMethodName) {
                     if (isset($annotations[$targetMethodName])) {
                         $method['method'] = $targetMethodName;
                         $method['parentRoute'] = $annotations[$targetMethodName] === true ? null : $annotations[$targetMethodName];
+                        $usedMethods[] = $targetMethodName;
                     }
                 }
 

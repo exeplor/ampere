@@ -33,7 +33,8 @@ class GridColumn
         'display' => null,
         'sortable' => false,
         'export' => true,
-        'attribute' => null
+        'attribute' => null,
+        'hidden' => false
     ];
 
     /**
@@ -113,6 +114,15 @@ class GridColumn
     {
         $this->fields['sortByDefault'] = true;
         $this->fields['sortDirection'] = self::SORT_DESC;
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function hidden(): self
+    {
+        $this->fields['hidden'] = true;
         return $this;
     }
 
