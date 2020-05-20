@@ -64,7 +64,8 @@ class PermissionsController extends Controller
     {
         $request = $this->validate([
             'action' => 'required',
-            'role_id' => 'required'
+            'role_id' => 'required',
+            'method' => 'required'
         ]);
 
         $routes = Ampere::router()->getRoutes();

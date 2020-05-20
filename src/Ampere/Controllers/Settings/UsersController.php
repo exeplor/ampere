@@ -98,7 +98,7 @@ class UsersController extends Controller
     /**
      * @return array
      */
-    private function form(): array
+    protected function form(): array
     {
         $fields = [
             'name' => ['string'],
@@ -120,7 +120,7 @@ class UsersController extends Controller
     /**
      * @return array
      */
-    private function roles(): array
+    protected function roles(): array
     {
         $fields = [
             'roles' => 'array'
@@ -132,7 +132,7 @@ class UsersController extends Controller
     /**
      * @param User $user
      */
-    private function updateRoles(User $user)
+    protected function updateRoles(User $user)
     {
         $permissionService = resolve(PermissionService::class);
 
