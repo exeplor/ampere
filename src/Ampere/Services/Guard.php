@@ -45,14 +45,23 @@ class Guard
         }
 
         if (Hash::check($data['password'], $user->password)) {
-            session([
-                $this->getSessionSpace('ampere_user_id') => $user->id
-            ]);
-
-            return true;
+            return $this->loginByUser($user);
         }
 
         return false;
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function loginByUser(User $user): bool
+    {
+        session([
+            $this->getSessionSpace('ampere_user_id') => $user->id
+        ]);
+
+        return true;
     }
 
     /**
