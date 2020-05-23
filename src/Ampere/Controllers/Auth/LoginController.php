@@ -45,13 +45,21 @@ class LoginController extends Controller
             return back()->withErrors(['email' => 'Email or password incorrect'])->withInput();
         }
 
+        return $this->redirectToHomePage();
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    protected function redirectToHomePage()
+    {
         return redirect(ampere_route('home'));
     }
 
     /**
      * @return bool
      */
-    private function validateCaptcha(): bool
+    protected function validateCaptcha(): bool
     {
         if (!ampere_config('auth.google_captcha.enabled')) {
             return true;

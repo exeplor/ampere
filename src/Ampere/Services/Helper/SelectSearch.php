@@ -68,10 +68,26 @@ class SelectSearch
     public function add(string $field, string $model, array $fields, string $key, \Closure $filter = null): self
     {
         $this->sources[$field] = (object)[
+            'type' => 'model',
             'model' => $model,
             'fields' => $fields,
             'key' => $key,
             'filter' => $filter
+        ];
+
+        return $this;
+    }
+
+    /**
+     * @param string $field
+     * @param \Closure $callback
+     * @return $this
+     */
+    public function addSource(string $field, \Closure $callback): self
+    {
+        $this->sources[$field] = (object)[
+            'type' => 'source',
+            'callback' => $callback
         ];
 
         return $this;
@@ -95,31 +111,49 @@ class SelectSearch
     {
         $source = $this->sources[$this->field];
 
-        /**
-         * @var Builder $query
-         */
-        $query = $source->model::query()->limit($this->limit);
+        $data = [];
+        if ($source->type == 'model') {
 
-        if ($this->targetId) {
-            $query->whereIn('id', is_array($this->targetId) ? $this->targetId : [$this->targetId]);
+            /**
+             * @var Builder $query
+             */
+            $query = $source->model::query()->limit($this->limit);
 
-        } else {
-            foreach ($source->fields as $field) {
-                $query->orWhere($field, 'LIKE', '%' . $this->query . '%');
+            if ($this->targetId) {
+                $query->whereIn('id', is_array($this->targetId) ? $this->targetId : [$this->targetId]);
+
+            } else {
+                foreach ($source->fields as $field) {
+                    $query->orWhere($field, 'LIKE', '%' . $this->query . '%');
+                }
+
+                if ($source->filter) {
+                    $filter = $source->filter;
+                    $filter($query);
+                }
             }
 
-            if ($source->filter) {
-                $filter = $source->filter;
-                $filter($query);
-            }
+            $data = $query->get()->map(function ($model) use ($source) {
+                return [
+                    'id' => $model->id,
+                    'text' => $model->{$source->key},
+                    'additional' => []
+                ];
+            })->toArray();
         }
 
-        $data = $query->get()->map(function($model) use ($source) {
-            return [
-                'id' => $model->id,
-                'text' => $model->{$source->key}
-            ];
-        })->toArray();
+        if ($source->type == 'source') {
+            $callback = $source->callback;
+            $list = $callback($this->query);
+
+            foreach($list as $row) {
+                $data[] = [
+                    'id' => $row[0],
+                    'text' => $row[1],
+                    'additional' => $row[2] ?? []
+                ];
+            }
+        }
 
         return $data;
     }

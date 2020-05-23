@@ -56,7 +56,9 @@
             @if($source)
                 ajax: ajaxParams,
                 templateSelection: function(row) {
-                    return $('<span>' + row.text + ' <span class="xid-selection">ID ' + row.id + '</span>' +  '</span>');
+                    var block = $('<span>');
+                    block.html(row.text + ' <span class="xid-selection">ID ' + row.id + '</span>');
+                    return block;
                 }
             @endif
         }
