@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 class Authenticate
 {
     /**
+     * @var string
+     */
+    private $preventLocationKey = 'guest-prevent-url';
+
+    /**
      * Handle an incoming request.
      *
      * @param $request
@@ -27,8 +32,17 @@ class Authenticate
             return $next($request);
         }
 
+        # $key = 'guest-prevent-url';
+
         if (Ampere::guard()->hasAccess($route['as'])) {
+            if ($url = session($this->preventLocationKey)) {
+                session([$this->preventLocationKey => null]);
+                return redirect($url);
+            }
             return $next($request);
+
+        } else {
+            session([$this->preventLocationKey => $request->url()]);
         }
 
         return redirect(ampere_route('auth.login'));
