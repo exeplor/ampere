@@ -40,11 +40,17 @@
             dataType: 'json',
             delay: 250,
             data: function (params) {
-                return {
+                params = {
                     query: params.term,
                     field: '{{ $name }}',
                     _token: '{{ csrf_token() }}'
                 }
+
+                if (window.__select2CustomParams) {
+                    params = window.__select2CustomParams(params);
+                }
+
+                return params;
             }
         };
 
@@ -77,7 +83,6 @@
 
                     data.results.map(function(item, id){
                         object.append($('<option>').attr('selected', 'selected').val(item.id).html(item.text));
-                        console.log(item, id);
                     });
 
                     object.select2(select2Options);

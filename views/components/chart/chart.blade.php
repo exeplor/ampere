@@ -1,15 +1,16 @@
-<?php
+<?
     /**
      * @var \Ampere\Services\Chart\ChartMap $chart
      */
 
     $id = 'chart_' . \Illuminate\Support\Str::random(32);
+    $colors = ['#2196F3', '#FF5722', '#3F51B5', '#009688', '#FFC107'];
+    $colors = ['#f44336', '#2196F3', '#009688', '#FF9800', '#9C27B0'];
+    $colors = ['#ef5350', '#AB47BC', '#42A5F5', '#26C6DA', '#FFA726'];
     $colors = [
         '#ef5350', '#42A5F5', '#26A69A', '#FFA726',
         '#7E57C2', '#5C6BC0', '#42A5F5', '#66BB6A',
-        '#FFB300', '#F4511E', '#546E7A', '#EC407A'
-    ];
-
+        '#FFB300', '#F4511E', '#546E7A', '#EC407A'];
     $offset = $chart->options['colorOffset'];
     $colors = array_merge(array_splice($colors, $offset), $colors);
 ?>
