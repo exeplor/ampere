@@ -79,16 +79,19 @@ class SelectSearch
     }
 
     /**
-     * @param string $field
+     * @param string $fields
      * @param \Closure $callback
      * @return $this
      */
-    public function addSource(string $field, \Closure $callback): self
+    public function addSource(string $fields, \Closure $callback): self
     {
-        $this->sources[$field] = (object)[
-            'type' => 'source',
-            'callback' => $callback
-        ];
+        $list = explode(',', $fields);
+        foreach($list as $field) {
+            $this->sources[$field] = (object)[
+                'type' => 'source',
+                'callback' => $callback
+            ];
+        }
 
         return $this;
     }
