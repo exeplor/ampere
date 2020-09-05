@@ -15,7 +15,7 @@ Ampere is a simple and flexible admin panel for Laravel framework.
 ### Installation
 Install package
 ```
-composer required exeplor/ampere
+composer require exeplor/ampere
 ```
 Add service provider to app.php
 ```php
